@@ -1,0 +1,19 @@
+name: Generate DeepWiki
+
+on:
+  push:
+    branches:
+      - dev   # 这里指定监听 dev 分支
+  workflow_dispatch: # 手动触发（可选）
+
+jobs:
+  generate-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout specific branch
+        uses: actions/checkout@v3
+        with:
+          ref: 2.3.3-release  # 拉取 dev 分支，你可以改成 main 或 feature/xxx
+
+      - name: Run DeepWiki
+        run: deepwiki generate
